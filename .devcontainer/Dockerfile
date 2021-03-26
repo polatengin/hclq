@@ -15,3 +15,9 @@ RUN apt-get update \
     && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" \
     && apt-get update \
     && apt-get install -y docker-ce-cli \
+    #
+    # Install Terraform
+    && CURR_VER=$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r -M '.current_version') \
+    && wget https://releases.hashicorp.com/terraform/${CURR_VER}/terraform_${CURR_VER}_linux_amd64.zip \
+    && unzip terraform_${CURR_VER}_linux_amd64.zip -d /usr/local/bin/ \
+    && rm -rf terraform_${CURR_VER}_linux_amd64.zip \
