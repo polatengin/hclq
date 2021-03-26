@@ -9,6 +9,7 @@
     "workbench.iconTheme": "vscode-icons"
   },
   "extensions": [
+    "ms-azuretools.vscode-docker",
     "editorconfig.editorconfig",
     "vscode-icons-team.vscode-icons"
   ]
