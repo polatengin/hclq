@@ -9,5 +9,6 @@
     "workbench.iconTheme": "vscode-icons"
   },
   "extensions": [
+    "vscode-icons-team.vscode-icons"
   ]
 }
