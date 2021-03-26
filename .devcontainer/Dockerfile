@@ -3,6 +3,11 @@ FROM golang:1.16.2-buster
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
 
+ARG USERNAME=vscode
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+# Configure apt and install packages
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog libicu63 libssl1.1 2>&1 \
     #
@@ -21,3 +26,7 @@ RUN apt-get update \
     && wget https://releases.hashicorp.com/terraform/${CURR_VER}/terraform_${CURR_VER}_linux_amd64.zip \
     && unzip terraform_${CURR_VER}_linux_amd64.zip -d /usr/local/bin/ \
     && rm -rf terraform_${CURR_VER}_linux_amd64.zip \
+    #
+    # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
+    && groupadd --gid $USER_GID $USERNAME \
+    && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
