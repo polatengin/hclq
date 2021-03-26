@@ -1,3 +1,4 @@
 {
   "name": "HCLQ Development Environment",
+  "dockerFile": "Dockerfile",
 }
